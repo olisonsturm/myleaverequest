@@ -1,0 +1,45 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+  typeNamePlural: 'Entitlements',
+  title.value: 'VacationDays',
+  description.value: 'EmployeeUuid'
+}
+annotate entity ZC_CEO_LeaveEntitlement
+  with 
+{
+  /* Facets */
+  @UI.facet: 
+  [
+    { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Details', targetQualifier: 'details' },
+    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administartive Data', targetQualifier: 'admindata' }
+  ] 
+
+  /* Fields */
+  @UI.hidden: true
+  EntitlementId;
+  
+  @UI.hidden: true
+  EmployeeUuid;
+  
+  @EndUserText: { label: 'Year', quickInfo: 'Year'}
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10 }]
+  @UI.fieldGroup: [{ position: 10, qualifier: 'details' }]
+  EntitlementYear;
+  
+  @EndUserText: { label: 'Remaining Vacation Days', quickInfo: 'Remaining Vacation Days' }
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 20 }]
+  @UI.fieldGroup: [{ position: 20, qualifier: 'details' }]
+  VacationDays;
+  
+  /* Admin Data */
+  @UI.fieldGroup: [{ position: 10, qualifier: 'admindata' }]
+  CreatedBy;
+  @UI.fieldGroup: [{ position: 20, qualifier: 'admindata' }]
+  CreatedAt;
+  @UI.fieldGroup: [{ position: 30, qualifier: 'admindata' }]
+  LastChangedBy;
+  @UI.fieldGroup: [{ position: 40, qualifier: 'admindata' }]
+  LastChangedAt;
+}

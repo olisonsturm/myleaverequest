@@ -1,0 +1,6 @@
+@EndUserText.label: 'My Leave Request'
+define service ZUI_CEO_MyLeaveRequest {
+  expose ZC_CEO_Employee         as Employees;
+  expose ZC_CEO_LeaveRequest     as LeaveRequests;
+  expose ZC_CEO_LeaveEntitlement as LeaveEntitlements;
+}

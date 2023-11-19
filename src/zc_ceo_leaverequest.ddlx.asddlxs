@@ -1,0 +1,55 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+  typeNamePlural: 'Leave Requests',
+  title.value: 'Remark',
+  description.value: 'ApplicantId'
+}
+annotate entity ZC_CEO_LeaveRequest
+  with 
+{
+  /* Facets */
+  @UI.facet: 
+  [
+    { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Details', targetQualifier: 'details' },
+    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administartive Data', targetQualifier: 'admindata' }
+  ] 
+
+  /* Fields */
+  @UI.hidden: true
+  RequestId;
+  
+  @UI.hidden: true
+  ApplicantId;
+  
+  @UI.hidden: true
+  ApproverId;
+  
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10 }]
+  @UI.fieldGroup: [{ position: 10, qualifier: 'details' }]
+  StartDate;
+  
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 20 }]
+  @UI.fieldGroup: [{ position: 20, qualifier: 'details' }]
+  EndDate;
+  
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem: [{ position: 30 }]
+  @UI.fieldGroup: [{ position: 30, qualifier: 'details' }]
+  State;
+  
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ position: 40, qualifier: 'details' }]
+  Remark;
+
+  /* Admin Data */
+  @UI.fieldGroup: [{ position: 10, qualifier: 'admindata' }]
+  CreatedBy;
+  @UI.fieldGroup: [{ position: 20, qualifier: 'admindata' }]
+  CreatedAt;
+  @UI.fieldGroup: [{ position: 30, qualifier: 'admindata' }]
+  LastChangedBy;
+  @UI.fieldGroup: [{ position: 40, qualifier: 'admindata' }]
+  LastChangedAt;
+}
