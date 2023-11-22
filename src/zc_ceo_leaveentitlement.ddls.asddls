@@ -4,6 +4,7 @@
 define view entity ZC_CEO_LeaveEntitlement
   as projection on ZR_CEO_LeaveEntitlement
 {
+  /* Fields */
   key EntitlementId,
   EmployeeUuid,
   EntitlementYear,

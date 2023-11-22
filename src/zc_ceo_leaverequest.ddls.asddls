@@ -4,6 +4,7 @@
 define view entity ZC_CEO_LeaveRequest
   as projection on ZR_CEO_LeaveRequest
 {
+  /* Fields */
   key RequestId,
   ApplicantId,
   ApproverId,
@@ -11,7 +12,10 @@ define view entity ZC_CEO_LeaveRequest
   EndDate,
   Remark,
   State,
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CEO_StateVH', element: 'StateDescription' }}]
   StateDescription,
+  StartDateCriticality,
+  StateCriticality,
   
   /* Admin Data */
   CreatedBy,

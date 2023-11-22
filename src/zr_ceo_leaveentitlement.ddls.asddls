@@ -5,6 +5,7 @@ define view entity ZR_CEO_LeaveEntitlement
   association to parent ZR_CEO_Employee as _Employee
   on $projection.EmployeeUuid = _Employee.EmployeeId
 {
+  /* Fields */
   @Semantics.uuid: true
   key entitlement_id as EntitlementId,
   @Semantics.uuid: true

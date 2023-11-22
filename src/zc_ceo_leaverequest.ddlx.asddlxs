@@ -25,7 +25,7 @@ annotate entity ZC_CEO_LeaveRequest
   ApproverId;
   
   @UI.selectionField: [{ position: 10 }]
-  @UI.lineItem: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10, criticality: 'StartDateCriticality', criticalityRepresentation: #WITHOUT_ICON}]
   @UI.fieldGroup: [{ position: 10, qualifier: 'details' }]
   StartDate;
   
@@ -34,14 +34,22 @@ annotate entity ZC_CEO_LeaveRequest
   @UI.fieldGroup: [{ position: 20, qualifier: 'details' }]
   EndDate;
   
+  @EndUserText: { label: 'State', quickInfo: 'State of Leave Request' }
   @UI.selectionField: [{ position: 30 }]
-  @UI.lineItem: [{ position: 30 }]
+  @UI.lineItem: [{ position: 30, criticality: 'StateCriticality', criticalityRepresentation: #WITH_ICON }]
+  @UI.dataPoint: { description: 'State of Leave Request', title: 'State', targetValueElement: 'StateDescription', criticality: 'StateCriticality' }
   @UI.fieldGroup: [{ position: 30, qualifier: 'details' }]
-  State;
+  StateDescription;
   
   @UI.lineItem: [{ position: 40 }]
   @UI.fieldGroup: [{ position: 40, qualifier: 'details' }]
   Remark;
+  
+  @UI.hidden: true
+  StartDateCriticality;
+  
+  @UI.hidden: true
+  StateCriticality;
 
   /* Admin Data */
   @UI.fieldGroup: [{ position: 10, qualifier: 'admindata' }]

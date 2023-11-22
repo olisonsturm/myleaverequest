@@ -3,13 +3,10 @@
 {
 "FROM":
 [
-"ZI_CEO_STATEVH",
 "ZCEO_LREQUEST_A"
 ],
 "ASSOCIATED":
-[
-"ZR_CEO_EMPLOYEE"
-],
+[],
 "BASE":
 [],
 "ANNO_REF":

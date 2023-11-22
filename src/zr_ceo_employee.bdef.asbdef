@@ -1,0 +1,90 @@
+managed implementation in class zbp_r_ceo_employee unique;
+strict ( 2 );
+//with draft;
+
+/* Root Entitiy Employee */
+define behavior for ZR_CEO_Employee alias Employee
+persistent table zceo_employee_a
+//draft table zceo_employee_d
+lock master
+//total etag LastChangedAt
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  association _LeaveEntitlements { create; }
+  association _LeaveRequests { create; }
+
+  field ( readonly, numbering : managed ) EmployeeId;
+
+  mapping for zceo_employee_a corresponding
+    {
+      EmployeeID = employee_id;
+      EmployeeNumber = employee_number;
+      FirstName = first_name;
+      LastName =  last_name;
+      EntryDate = entry_date;
+      CreatedBy = created_by;
+      CreatedAt = created_at;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
+    }
+}
+
+define behavior for ZR_CEO_LeaveEntitlement alias LeaveEtitlement
+persistent table zceo_entitleme_a
+//draft table zceo_entitleme_d
+lock dependent by _Employee
+authorization dependent by _Employee
+//etag master <field_name>
+{
+  update;
+  delete;
+  association _Employee;
+
+  field ( readonly, numbering : managed ) EntitlementId;
+  field ( readonly ) EmployeeUuid;
+
+  mapping for zceo_entitleme_a corresponding
+    {
+      EntitlementId = entitlement_id;
+      EmployeeUuid = employee_uuid;
+      EntitlementYear = entitlement_year;
+      VacationDays = vacation_days;
+      CreatedBy = created_by;
+      CreatedAt = created_at;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
+    }
+}
+
+define behavior for ZR_CEO_LeaveRequest alias LeaveRequest
+persistent table zceo_lrequest_a
+//draft table zceo_lrequest_b
+lock dependent by _Applicant
+authorization dependent by _Applicant
+//etag master <field_name>
+{
+  update;
+  delete;
+
+  association _Applicant;
+  association _Approver;
+
+  field ( readonly, numbering : managed ) RequestId;
+  field ( readonly ) ApplicantId;
+
+  mapping for zceo_lrequest_a corresponding
+    {
+      RequestId = request_id;
+      ApplicantId = applicant_id;
+      ApproverId = approver_id;
+      StartDate = start_date;
+      EndDate = end_date;
+      Remark = remark;
+      State = state;
+    }
+}
