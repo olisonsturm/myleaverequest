@@ -4,8 +4,8 @@ define view entity ZI_CEO_PlannedVacationDays
   as select from zceo_lrequest_a
 {
   /* Fields */
-  applicant_id                                 as EmployeeUuid,
-  sum(dats_days_between(start_date, end_date)) as PlannedVacationDays
+  applicant_id       as EmployeeUuid,
+  sum(vacation_days) as PlannedVacationDays
 }
 where
       state      <> 'D'

@@ -1,9 +1,9 @@
 @Metadata.layer: #CORE
 @UI.headerInfo: {
   typeNamePlural: 'Leave Requests',
-  title.value: 'Remark',
-  description.value: 'ApplicantId'
+  title.value: 'Remark'
 }
+@UI.presentationVariant: [{sortOrder: [{ by: 'StartDate', direction: #DESC }]}]
 annotate entity ZC_CEO_LeaveRequest
   with 
 {
@@ -11,31 +11,45 @@ annotate entity ZC_CEO_LeaveRequest
   @UI.facet: 
   [
     { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Details', targetQualifier: 'details' },
-    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administartive Data', targetQualifier: 'admindata' }
+    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'admindata' }
   ] 
+  
+  /* Actions */
+  @UI.lineItem: [
+    { position: 10, type: #FOR_ACTION, dataAction: 'ApproveLeaveRequest', label: 'Approve' },
+    { position: 20, type: #FOR_ACTION, dataAction: 'DeclineLeaveRequest', label: 'Decline' }
+  ]
 
   /* Fields */
   @UI.hidden: true
   RequestId;
   
-  @UI.hidden: true
-  ApplicantId;
-  
-  @UI.hidden: true
+  @EndUserText: { label: 'Approver', quickInfo: 'Full Name of Approver'}
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 60 }]
+  @UI.fieldGroup: [{ position: 60, qualifier: 'details' }]
   ApproverId;
   
-  @UI.selectionField: [{ position: 10 }]
+  @EndUserText: { label: 'Applicant', quickInfo: 'Full Name of Applicant' }
+  @UI.lineItem: [{ position: 5 }]
+  ApplicantId;
+  
   @UI.lineItem: [{ position: 10, criticality: 'StartDateCriticality', criticalityRepresentation: #WITHOUT_ICON}]
   @UI.fieldGroup: [{ position: 10, qualifier: 'details' }]
   StartDate;
   
-  @UI.selectionField: [{ position: 20 }]
   @UI.lineItem: [{ position: 20 }]
   @UI.fieldGroup: [{ position: 20, qualifier: 'details' }]
   EndDate;
   
+  @EndUserText: { label: 'Required Vacation Days', quickInfo: 'Required Vacation Days' }
+  @UI.lineItem: [{hidden: true}]
+  @UI.selectionField: [{exclude: true}]
+  @UI.fieldGroup: [{ position: 70, qualifier: 'details' }]
+  VacationDays;
+  
   @EndUserText: { label: 'State', quickInfo: 'State of Leave Request' }
-  @UI.selectionField: [{ position: 30 }]
+  @UI.selectionField: [{ position: 20 }]
   @UI.lineItem: [{ position: 30, criticality: 'StateCriticality', criticalityRepresentation: #WITH_ICON }]
   @UI.dataPoint: { description: 'State of Leave Request', title: 'State', targetValueElement: 'StateDescription', criticality: 'StateCriticality' }
   @UI.fieldGroup: [{ position: 30, qualifier: 'details' }]
@@ -44,6 +58,12 @@ annotate entity ZC_CEO_LeaveRequest
   @UI.lineItem: [{ position: 40 }]
   @UI.fieldGroup: [{ position: 40, qualifier: 'details' }]
   Remark;
+  
+  @UI.dataPoint: { description: 'Full Name of Approver', title: 'Approver', targetValueElement: 'ApproverFullName' }
+  ApproverFullName;
+  
+  @UI.dataPoint: { description: 'Full Name of Applicant', title: 'Applicant', targetValueElement: 'ApplicantFullName' }
+  ApplicantFullName;
   
   @UI.hidden: true
   StartDateCriticality;

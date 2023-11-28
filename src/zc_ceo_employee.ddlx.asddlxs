@@ -2,8 +2,9 @@
 @UI.headerInfo: {
   typeNamePlural: 'Employees',
   title.value: 'FullName',
-  description.value: 'EmployeeNumberWithLeadingZeros'
+  description.value: 'EmployeeNumber'
 }
+@UI.presentationVariant: [{sortOrder: [{ by: 'EmployeeNumber', direction: #ASC }]}]
 annotate entity ZC_CEO_Employee with
 {
   /* Facets */
@@ -12,28 +13,25 @@ annotate entity ZC_CEO_Employee with
     { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Details', targetQualifier: 'details' },
     { position: 20, type: #LINEITEM_REFERENCE,  targetElement: '_LeaveEntitlements', label: 'Entitlements' },
     { position: 30, type: #LINEITEM_REFERENCE,  targetElement: '_LeaveRequests', label: 'Leave Requests' },
-    { position: 40, type: #FIELDGROUP_REFERENCE, label: 'Administartive Data', targetQualifier: 'admindata' }
+    { position: 40, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'admindata' }
   ]
 
   /* Fields */
   @UI.hidden: true
   EmployeeId;
 
-  @UI.hidden: true
-  EmployeeNumber;
-
   @EndUserText: { label: 'Employee Number', quickInfo: 'Number of Employee'}
   @UI.selectionField: [{ position: 10 }]
   @UI.lineItem: [{ position: 10 }]
   @UI.fieldGroup: [{ position: 10, qualifier: 'details' }]
-  EmployeeNumberWithLeadingZeros;
+  EmployeeNumber;
 
-  @EndUserText: { label: 'Firstname', quickInfo: 'Givenname'}
+  @EndUserText: { label: 'First Name', quickInfo: 'Givenname'}
   @UI.lineItem: [{ position: 20 }]
   @UI.fieldGroup: [{ position: 20, qualifier: 'details' }]
   FirstName;
 
-  @EndUserText: { label: 'Lastname', quickInfo: 'Surname'}
+  @EndUserText: { label: 'Last Name', quickInfo: 'Surname'}
   @UI.lineItem: [{ position: 30 }]
   @UI.fieldGroup: [{ position: 30, qualifier: 'details' }]
   LastName;
@@ -48,17 +46,26 @@ annotate entity ZC_CEO_Employee with
   EntryDate;
 
   @EndUserText: { label: 'Available Vacation Days', quickInfo: 'Availavle Vacation Days'}
-  @UI.lineItem: [{ position: 70, criticality: 'AvailableVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
+  @UI.lineItem: [{ position: 50, criticality: 'AvailableVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
   @UI.dataPoint: { description: 'Available Vacation Days', title: 'Available Vacation Days', targetValueElement: 'AvailableVacationDays', criticality: 'AvailableVDaysCriticality' }
   AvailableVacationDays;
   @EndUserText: { label: 'Planned Vacation Days', quickInfo: 'Planned Vacation Days'}
-  @UI.lineItem: [{ position: 70, criticality: 'PlannedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
+  @UI.lineItem: [{ position: 60, criticality: 'PlannedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
   @UI.dataPoint: { description: 'Available Vacation Days', title: 'Planned Vacation Days', targetValueElement: 'PlannedVacationDays', criticality: 'PlannedVDaysCriticality'}
   PlannedVacationDays;
   @EndUserText: { label: 'Consumed Vacation Days', quickInfo: 'Consumed Vacation Days'}
   @UI.lineItem: [{ position: 70, criticality: 'ConsumedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
   @UI.dataPoint: { description: 'Consumed Vacation Days', title: 'Consumed Vacation Days', targetValueElement: 'ConsumedVacationDays', criticality: 'ConsumedVDaysCriticality'}
   ConsumedVacationDays;
+  
+  @UI.hidden: true
+  AvailableVDaysCriticality;
+  
+  @UI.hidden: true
+  PlannedVDaysCriticality;
+  
+  @UI.hidden: true
+  ConsumedVDaysCriticality;
 
   /* Admin Data */
   @UI.fieldGroup: [{ position: 10, qualifier: 'admindata' }]

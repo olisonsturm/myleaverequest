@@ -4,6 +4,7 @@
   title.value: 'VacationDays',
   description.value: 'EmployeeUuid'
 }
+@UI.presentationVariant: [{sortOrder: [{ by: 'EntitlementYear', direction: #DESC }]}]
 annotate entity ZC_CEO_LeaveEntitlement
   with 
 {
@@ -11,7 +12,7 @@ annotate entity ZC_CEO_LeaveEntitlement
   @UI.facet: 
   [
     { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Details', targetQualifier: 'details' },
-    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administartive Data', targetQualifier: 'admindata' }
+    { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'admindata' }
   ] 
 
   /* Fields */

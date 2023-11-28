@@ -18,19 +18,26 @@ authorization master ( instance )
   association _LeaveEntitlements { create; }
   association _LeaveRequests { create; }
 
+  determination DetermineEmployeeNumber on modify { create; }
+
   field ( readonly, numbering : managed ) EmployeeId;
+  field ( readonly ) EmployeeNumber;
+  field ( mandatory : create ) LastName, FirstName, EntryDate;
+  field ( readonly : update ) EntryDate;
+  // Admin Data
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zceo_employee_a corresponding
     {
-      EmployeeID = employee_id;
+      EmployeeID     = employee_id;
       EmployeeNumber = employee_number;
-      FirstName = first_name;
-      LastName =  last_name;
-      EntryDate = entry_date;
-      CreatedBy = created_by;
-      CreatedAt = created_at;
-      LastChangedBy = last_changed_by;
-      LastChangedAt = last_changed_at;
+      FirstName      = first_name;
+      LastName       = last_name;
+      EntryDate      = entry_date;
+      CreatedBy      = created_by;
+      CreatedAt      = created_at;
+      LastChangedBy  = last_changed_by;
+      LastChangedAt  = last_changed_at;
     }
 }
 
@@ -43,21 +50,25 @@ authorization dependent by _Employee
 {
   update;
   delete;
+
   association _Employee;
 
   field ( readonly, numbering : managed ) EntitlementId;
   field ( readonly ) EmployeeUuid;
+  field ( readonly : update ) EntitlementYear;
+  // Admin Data
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zceo_entitleme_a corresponding
     {
-      EntitlementId = entitlement_id;
-      EmployeeUuid = employee_uuid;
+      EntitlementId   = entitlement_id;
+      EmployeeUuid    = employee_uuid;
       EntitlementYear = entitlement_year;
-      VacationDays = vacation_days;
-      CreatedBy = created_by;
-      CreatedAt = created_at;
-      LastChangedBy = last_changed_by;
-      LastChangedAt = last_changed_at;
+      VacationDays    = vacation_days;
+      CreatedBy       = created_by;
+      CreatedAt       = created_at;
+      LastChangedBy   = last_changed_by;
+      LastChangedAt   = last_changed_at;
     }
 }
 
@@ -74,17 +85,36 @@ authorization dependent by _Applicant
   association _Applicant;
   association _Approver;
 
+  action DeclineLeaveRequest result [1] $self;
+  action ApproveLeaveRequest result [1] $self;
+
+  validation ValidateSufficientVacationDays on save { create; }
+  validation ValidateDates on save { create; }
+
+  determination DetermineVacationDays on modify { create; }
+  determination DetermineState on modify { create; }
+
   field ( readonly, numbering : managed ) RequestId;
   field ( readonly ) ApplicantId;
+  field ( readonly ) State, StateDescription, VacationDays;
+  field ( mandatory : create ) ApproverId, StartDate, EndDate;
+  field ( readonly : update ) ApproverId, StartDate, EndDate;
+  // Admin Data
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zceo_lrequest_a corresponding
     {
-      RequestId = request_id;
-      ApplicantId = applicant_id;
-      ApproverId = approver_id;
-      StartDate = start_date;
-      EndDate = end_date;
-      Remark = remark;
-      State = state;
+      RequestId     = request_id;
+      ApplicantId   = applicant_id;
+      ApproverId    = approver_id;
+      StartDate     = start_date;
+      EndDate       = end_date;
+      VacationDays  = vacation_days;
+      Remark        = remark;
+      State         = state;
+      CreatedBy     = created_by;
+      CreatedAt     = created_at;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
     }
 }

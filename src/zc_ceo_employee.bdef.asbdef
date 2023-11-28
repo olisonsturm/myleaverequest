@@ -26,4 +26,8 @@ define behavior for ZC_CEO_LeaveRequest //alias <alias_name>
 
   use association _Applicant;
   use association _Approver;
+
+  use action DeclineLeaveRequest;
+  use action ApproveLeaveRequest;
+
 }

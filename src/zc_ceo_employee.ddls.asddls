@@ -8,9 +8,8 @@ define root view entity ZC_CEO_Employee
 {
       /* Fields */
   key EmployeeId,
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CEO_EmployeeNumVH', element: 'EmployeeNumber' } }]
       EmployeeNumber,
-      @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CEO_EmployeeNumVH', element: 'EmployeeNumberWithLeadingZeros' } }]
-      EmployeeNumberWithLeadingZeros,
       @Search.defaultSearchElement: true
       @Search.fuzzinessThreshold: 0.7
       FirstName,

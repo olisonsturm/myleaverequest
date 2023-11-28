@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZCEO_LREQUEST</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Message Leave Request</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>The Leave Request &amp;1 was declined successfully</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>The Leave Request &amp;1 was already declined</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>The Leave Request &amp;1 was approved successfully</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>The Leave Request &amp;1 was already approved</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>The end date cannot be before the start date by creating a leave request</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>The start date cannot be in the past when creating a leave request</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCEO_LREQUEST</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Insufficient vacation days available for the leave request</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

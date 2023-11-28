@@ -1,7 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'State Value Help'
 @Search.searchable: true
-//@ObjectModel.resultSet.sizeCategory: #XS
+@ObjectModel.resultSet.sizeCategory: #XS
 define view entity ZI_CEO_StateVH
   as select from DDCDS_CUSTOMER_DOMAIN_VALUE_T( p_domain_name: 'ZCEO_STATE' )
 {

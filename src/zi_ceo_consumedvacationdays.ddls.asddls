@@ -4,17 +4,11 @@ define view entity ZI_CEO_ConsumedVacationDays
   as select from zceo_lrequest_a
 {
       /* Fields */
-  key applicant_id as EmployeeUuid,
-      sum(
-        case when end_date > $session.user_date
-          then
-            dats_days_between(start_date, $session.user_date)
-          else
-            dats_days_between(start_date, end_date)
-        end)       as ConsumedVacationDays
+  key applicant_id       as EmployeeUuid,
+      sum(vacation_days) as ConsumedVacationDays
 }
 where
-      state      = 'A'
+      state      <> 'D'
   and start_date < $session.user_date
 group by
   applicant_id,
