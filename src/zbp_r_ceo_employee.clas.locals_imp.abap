@@ -14,7 +14,6 @@ CLASS lhc_leaverequest DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR LeaveRequest~DetermineVacationDays.
     METHODS ValidateDates FOR VALIDATE ON SAVE
       IMPORTING keys FOR LeaveRequest~ValidateDates.
-
     METHODS ValidateSufficientVacationDays FOR VALIDATE ON SAVE
       IMPORTING keys FOR LeaveRequest~ValidateSufficientVacationDays.
 
@@ -143,9 +142,9 @@ CLASS lhc_leaverequest IMPLEMENTATION.
   METHOD DetermineState.
     " Read LeaveRequests
     READ ENTITY IN LOCAL MODE ZR_CEO_LeaveRequest
-         FIELDS ( State )
-         WITH CORRESPONDING #( keys )
-         RESULT DATA(leaverequests).
+        FIELDS ( State )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(leaverequests).
 
     " Modify LeaveRequests
     MODIFY ENTITY IN LOCAL MODE ZR_CEO_LeaveRequest
@@ -163,13 +162,13 @@ CLASS lhc_leaverequest IMPLEMENTATION.
     " Process Leave Request
     LOOP AT leaverequests REFERENCE INTO DATA(leaverequest).
       TRY.
-          DATA: end_date_extended TYPE d.
-          end_date_extended = leaverequest->EndDate + 1.
+          DATA: start_date_extended TYPE d.
+          start_date_extended = leaverequest->StartDate - 1.
           DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
-          DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = leaverequest->StartDate iv_end = end_date_extended ).
+          DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = start_date_extended iv_end = leaverequest->EndDate ).
           leaverequest->VacationDays = working_days.
-      CATCH cx_fhc_runtime INTO DATA(exc).
-          leaverequest->VacationDays = -1. " Error
+        CATCH cx_fhc_runtime INTO DATA(exc).
+          leaverequest->VacationDays = 0. " Error
       ENDTRY.
     ENDLOOP.
 
@@ -231,14 +230,17 @@ CLASS lhc_leaverequest IMPLEMENTATION.
 
       " Validate AvailableVacationDays and Create Error Message
       TRY.
-            DATA: end_date_extended TYPE d.
-            end_date_extended = leaverequest->EndDate + 1.
-            DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
-            DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = leaverequest->StartDate iv_end = end_date_extended ).
+          DATA: start_date_extended TYPE d.
+          start_date_extended = leaverequest->StartDate - 1.
+          DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
+          DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = start_date_extended iv_end = leaverequest->EndDate ).
         CATCH cx_fhc_runtime INTO DATA(exc).
       ENDTRY.
       SELECT FROM ZI_CEO_AvailableVacationDays FIELDS AvailableVacationDays INTO @DATA(availablevacationdays). ENDSELECT.
-      IF availablevacationdays > working_days.
+      IF availablevacationdays IS INITIAL.
+        availablevacationdays = 0.
+      ENDIF.
+      IF availablevacationdays < working_days.
         message = NEW zcm_ceo_lrequest(
             textid = zcm_ceo_lrequest=>lrequest_insufficientvacdays
             severity = if_abap_behv_message=>severity-error
@@ -269,22 +271,22 @@ CLASS lhc_employee IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD DetermineEmployeeNumber.
-    " Read Travels
+    " Read Employee
     READ ENTITY IN LOCAL MODE ZR_CEO_Employee
          FIELDS ( EmployeeNumber )
          WITH CORRESPONDING #( keys )
          RESULT DATA(employees).
 
-    " Process Travels
+    " Process Employee
     LOOP AT employees REFERENCE INTO DATA(employee).
 
-      " Set Travel ID
+      " Set Employee Number
       SELECT FROM zceo_employee_a FIELDS MAX( employee_number ) INTO @DATA(max_employee_number).
       employee->EmployeeNumber = max_employee_number + 1.
 
     ENDLOOP.
 
-    " Modify Travels
+    " Modify Employee
     MODIFY ENTITY IN LOCAL MODE ZR_CEO_Employee
            UPDATE FIELDS ( EmployeeNumber )
            WITH VALUE #( FOR e IN employees

@@ -85,6 +85,7 @@ CLASS ZCEO_GENERATOR IMPLEMENTATION.
     lrequest-approver_id     = lisa_uuid.
     lrequest-start_date      = '20220701'.
     lrequest-end_date        = '20220710'.
+    lrequest-vacation_days   = 6.
     lrequest-remark          = 'Summer Holiday'.
     lrequest-state           = 'A'.
     APPEND lrequest TO lrequests.
@@ -93,6 +94,7 @@ CLASS ZCEO_GENERATOR IMPLEMENTATION.
     lrequest-approver_id     = lisa_uuid.
     lrequest-start_date      = '20221227'.
     lrequest-end_date        = '20221230'.
+    lrequest-vacation_days   = 4.
     lrequest-remark          = 'Christmas Holiday'.
     lrequest-state           = 'D'.
     APPEND lrequest TO lrequests.
@@ -101,6 +103,7 @@ CLASS ZCEO_GENERATOR IMPLEMENTATION.
     lrequest-approver_id     = lisa_uuid.
     lrequest-start_date      = '20221228'.
     lrequest-end_date        = '20221230'.
+    lrequest-vacation_days   = 3.
     lrequest-remark          = 'Christmas Holiday (Second try)'.
     lrequest-state           = 'A'.
     APPEND lrequest TO lrequests.
@@ -109,6 +112,7 @@ CLASS ZCEO_GENERATOR IMPLEMENTATION.
     lrequest-approver_id     = lisa_uuid.
     lrequest-start_date      = '20230527'.
     lrequest-end_date        = '20230614'.
+    lrequest-vacation_days   = 15.
     lrequest-remark          = ' '.
     lrequest-state           = 'Approved'.
     APPEND lrequest TO lrequests.
@@ -117,6 +121,7 @@ CLASS ZCEO_GENERATOR IMPLEMENTATION.
     lrequest-approver_id     = lisa_uuid.
     lrequest-start_date      = '20231220'.
     lrequest-end_date        = '20231231'.
+    lrequest-vacation_days   = 8.
     lrequest-remark          = 'Winter Holiday'.
     lrequest-state           = 'R'.
     APPEND lrequest TO lrequests.
@@ -138,6 +143,7 @@ CLASS ZCEO_GENERATOR IMPLEMENTATION.
     lrequest-approver_id     = hans_uuid.
     lrequest-start_date      = '20231227'.
     lrequest-end_date        = '20231231'.
+    lrequest-vacation_days   = 3.
     lrequest-remark          = 'Christmas Holiday'.
     lrequest-state           = 'R'.
     APPEND lrequest TO lrequests.

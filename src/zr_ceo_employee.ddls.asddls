@@ -23,11 +23,10 @@ define root view entity ZR_CEO_Employee
       _AvailableVD.AvailableVacationDays                 as AvailableVacationDays,
       _PlannedVD.PlannedVacationDays                     as PlannedVacationDays,
       _ConsumedVD.ConsumedVacationDays                   as ConsumedVacationDays,
+      
       '3'                                                as AvailableVDaysCriticality,
       '2'                                                as PlannedVDaysCriticality,
       '1'                                                as ConsumedVDaysCriticality,
-
-
 
       /* Admin Data */
       @Semantics.user.createdBy: true

@@ -49,23 +49,23 @@ annotate entity ZC_CEO_Employee with
   @UI.lineItem: [{ position: 50, criticality: 'AvailableVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
   @UI.dataPoint: { description: 'Available Vacation Days', title: 'Available Vacation Days', targetValueElement: 'AvailableVacationDays', criticality: 'AvailableVDaysCriticality' }
   AvailableVacationDays;
-  @EndUserText: { label: 'Planned Vacation Days', quickInfo: 'Planned Vacation Days'}
-  @UI.lineItem: [{ position: 60, criticality: 'PlannedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
-  @UI.dataPoint: { description: 'Available Vacation Days', title: 'Planned Vacation Days', targetValueElement: 'PlannedVacationDays', criticality: 'PlannedVDaysCriticality'}
-  PlannedVacationDays;
   @EndUserText: { label: 'Consumed Vacation Days', quickInfo: 'Consumed Vacation Days'}
-  @UI.lineItem: [{ position: 70, criticality: 'ConsumedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
+  @UI.lineItem: [{ position: 60, criticality: 'ConsumedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
   @UI.dataPoint: { description: 'Consumed Vacation Days', title: 'Consumed Vacation Days', targetValueElement: 'ConsumedVacationDays', criticality: 'ConsumedVDaysCriticality'}
   ConsumedVacationDays;
+  @EndUserText: { label: 'Planned Vacation Days', quickInfo: 'Planned Vacation Days'}
+  @UI.lineItem: [{ position: 70, criticality: 'PlannedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
+  @UI.dataPoint: { description: 'Available Vacation Days', title: 'Planned Vacation Days', targetValueElement: 'PlannedVacationDays', criticality: 'PlannedVDaysCriticality'}
+  PlannedVacationDays;
   
   @UI.hidden: true
   AvailableVDaysCriticality;
   
   @UI.hidden: true
-  PlannedVDaysCriticality;
+  ConsumedVDaysCriticality;
   
   @UI.hidden: true
-  ConsumedVDaysCriticality;
+  PlannedVDaysCriticality;
 
   /* Admin Data */
   @UI.fieldGroup: [{ position: 10, qualifier: 'admindata' }]

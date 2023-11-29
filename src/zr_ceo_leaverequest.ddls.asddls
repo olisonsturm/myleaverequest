@@ -23,9 +23,7 @@ define view entity ZR_CEO_LeaveRequest
       @Semantics.dateTime: true
       end_date                  as EndDate,
       vacation_days             as VacationDays,
-      @Semantics.text: true
       remark                    as Remark,
-      @ObjectModel.text.element: [ 'StateDescription' ]
       state                     as State,
 
       /* Transient Data */

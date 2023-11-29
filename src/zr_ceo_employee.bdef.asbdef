@@ -74,7 +74,7 @@ authorization dependent by _Employee
 
 define behavior for ZR_CEO_LeaveRequest alias LeaveRequest
 persistent table zceo_lrequest_a
-//draft table zceo_lrequest_b
+//draft table zceo_lrequest_d
 lock dependent by _Applicant
 authorization dependent by _Applicant
 //etag master <field_name>
@@ -92,11 +92,10 @@ authorization dependent by _Applicant
   validation ValidateDates on save { create; }
 
   determination DetermineVacationDays on modify { create; }
-  determination DetermineState on modify { create; }
+  determination DetermineState on modify { field ApplicantId, StartDate, EndDate, Remark; }
 
   field ( readonly, numbering : managed ) RequestId;
-  field ( readonly ) ApplicantId;
-  field ( readonly ) State, StateDescription, VacationDays;
+  field ( readonly ) ApplicantId, State, StateDescription, VacationDays;
   field ( mandatory : create ) ApproverId, StartDate, EndDate;
   field ( readonly : update ) ApproverId, StartDate, EndDate;
   // Admin Data

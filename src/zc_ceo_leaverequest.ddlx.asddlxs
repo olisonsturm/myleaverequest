@@ -48,6 +48,9 @@ annotate entity ZC_CEO_LeaveRequest
   @UI.fieldGroup: [{ position: 70, qualifier: 'details' }]
   VacationDays;
   
+  @UI.hidden: true
+  State;
+  
   @EndUserText: { label: 'State', quickInfo: 'State of Leave Request' }
   @UI.selectionField: [{ position: 20 }]
   @UI.lineItem: [{ position: 30, criticality: 'StateCriticality', criticalityRepresentation: #WITH_ICON }]
@@ -59,9 +62,13 @@ annotate entity ZC_CEO_LeaveRequest
   @UI.fieldGroup: [{ position: 40, qualifier: 'details' }]
   Remark;
   
+  @EndUserText: { label: 'Approver', quickInfo: 'Full Name of Approver' }
+  @UI.lineItem: [{ hidden: true }]
   @UI.dataPoint: { description: 'Full Name of Approver', title: 'Approver', targetValueElement: 'ApproverFullName' }
   ApproverFullName;
   
+  @EndUserText: { label: 'Applicant', quickInfo: 'Full Name of Applicant' }
+  @UI.lineItem: [{ hidden: true }]
   @UI.dataPoint: { description: 'Full Name of Applicant', title: 'Applicant', targetValueElement: 'ApplicantFullName' }
   ApplicantFullName;
   

@@ -1,8 +1,7 @@
 @Metadata.layer: #CORE
 @UI.headerInfo: {
   typeNamePlural: 'Entitlements',
-  title.value: 'VacationDays',
-  description.value: 'EmployeeUuid'
+  title.value: 'VacationDays'
 }
 @UI.presentationVariant: [{sortOrder: [{ by: 'EntitlementYear', direction: #DESC }]}]
 annotate entity ZC_CEO_LeaveEntitlement

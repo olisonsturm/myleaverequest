@@ -8,8 +8,8 @@ define view entity ZI_CEO_PlannedVacationDays
   sum(vacation_days) as PlannedVacationDays
 }
 where
-      state      <> 'D'
-  and start_date > $session.system_date
+      state    <> 'D'
+  and end_date >= $session.system_date
 group by
   applicant_id,
   state;
