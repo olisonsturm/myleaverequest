@@ -11,5 +11,4 @@ where
       state    <> 'D'
   and end_date < $session.user_date
 group by
-  applicant_id,
-  state;
+  applicant_id;

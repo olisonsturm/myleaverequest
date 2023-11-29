@@ -1,0 +1,16 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_CEO_EmployeeApproval
+{
+  use association _LeaveRequests;
+}
+
+define behavior for ZC_CEO_LeaveRequestApproval
+{
+  use action DeclineLeaveRequest;
+  use action ApproveLeaveRequest;
+
+  use association _Applicant;
+  use association _Approver;
+}

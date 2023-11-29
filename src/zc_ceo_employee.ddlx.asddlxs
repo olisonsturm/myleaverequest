@@ -16,6 +16,11 @@ annotate entity ZC_CEO_Employee with
     { position: 40, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'admindata' }
   ]
 
+  /* Aktions */
+  @UI.identification: [
+    { position: 10, type: #FOR_ACTION, dataAction: 'Refresh', label: 'Refresh' }
+  ]
+
   /* Fields */
   @UI.hidden: true
   EmployeeId;
@@ -57,13 +62,13 @@ annotate entity ZC_CEO_Employee with
   @UI.lineItem: [{ position: 70, criticality: 'PlannedVDaysCriticality', criticalityRepresentation: #WITHOUT_ICON }]
   @UI.dataPoint: { description: 'Available Vacation Days', title: 'Planned Vacation Days', targetValueElement: 'PlannedVacationDays', criticality: 'PlannedVDaysCriticality'}
   PlannedVacationDays;
-  
+
   @UI.hidden: true
   AvailableVDaysCriticality;
-  
+
   @UI.hidden: true
   ConsumedVDaysCriticality;
-  
+
   @UI.hidden: true
   PlannedVDaysCriticality;
 

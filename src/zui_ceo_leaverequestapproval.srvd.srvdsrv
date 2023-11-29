@@ -1,0 +1,5 @@
+@EndUserText.label: 'My Leave Request'
+define service ZUI_CEO_LeaveRequestApproval {
+  expose ZC_CEO_LeaveRequestApproval as LeaveRequestApproval;
+  expose ZC_CEO_EmployeeApproval     as Employees;
+}

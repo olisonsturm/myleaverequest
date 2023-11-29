@@ -4,9 +4,9 @@
   <asx:values>
    <SRVB>
     <METADATA>
-     <NAME>ZUI_CEO_MYLEAVEREQUEST_04</NAME>
+     <NAME>ZC_CEO_LREQUESTAPPROVAL_02</NAME>
      <TYPE>SRVB/SVB</TYPE>
-     <DESCRIPTION>My Leave Request OData V4</DESCRIPTION>
+     <DESCRIPTION>Leave Request Approval OData V2</DESCRIPTION>
      <LANGUAGE>EN</LANGUAGE>
      <LINKS>
       <item>
@@ -15,10 +15,10 @@
        <TITLE>Historic versions</TITLE>
       </item>
       <item>
-       <HREF>/sap/bc/adt/businessservices/odatav4/ZUI_CEO_MYLEAVEREQUEST_04</HREF>
-       <REL>http://www.sap.com/categories/odatav4</REL>
-       <TYPE>application/vnd.sap.adt.businessservices.odatav4.v1+xml</TYPE>
-       <TITLE>ODATAV4</TITLE>
+       <HREF>/sap/bc/adt/businessservices/odatav2/ZC_CEO_LREQUESTAPPROVAL_02</HREF>
+       <REL>http://www.sap.com/categories/odatav2</REL>
+       <TYPE>application/vnd.sap.adt.businessservices.odatav2.v2+xml</TYPE>
+       <TITLE>ODATAV2</TITLE>
       </item>
       <item>
        <HREF>/sap/bc/adt/businessservices/testclass</HREF>
@@ -44,21 +44,21 @@
     </METADATA>
     <CONTENT>
      <BIND_TYPE_IMPL>
-      <NAME>ZUI_CEO_MYLEAVEREQUEST_04</NAME>
+      <NAME>ZC_CEO_LREQUESTAPPROVAL_02</NAME>
      </BIND_TYPE_IMPL>
      <BIND_TYPE>ODATA</BIND_TYPE>
-     <BIND_TYPE_VERSION>V4</BIND_TYPE_VERSION>
+     <BIND_TYPE_VERSION>V2</BIND_TYPE_VERSION>
      <SERVICES>
       <item>
-       <SERVICE_NAME>ZUI_CEO_MYLEAVEREQUEST</SERVICE_NAME>
+       <SERVICE_NAME>ZC_CEO_LREQUESTAPPROVAL_02</SERVICE_NAME>
        <SERVICE_CONTENT>
         <item>
          <SERVICE_VERSION>0001</SERVICE_VERSION>
          <RELEASE_STATE>NOT_RELEASED</RELEASE_STATE>
          <SRVD_REF>
-          <URI>/sap/bc/adt/ddic/srvd/sources/zui_ceo_myleaverequest</URI>
+          <URI>/sap/bc/adt/ddic/srvd/sources/zui_ceo_leaverequestapproval</URI>
           <TYPE>SRVD/SRV</TYPE>
-          <NAME>ZUI_CEO_MYLEAVEREQUEST</NAME>
+          <NAME>ZUI_CEO_LEAVEREQUESTAPPROVAL</NAME>
          </SRVD_REF>
          <BIND_TYPE_DATA>
           <CONTENT>

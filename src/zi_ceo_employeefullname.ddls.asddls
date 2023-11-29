@@ -3,6 +3,7 @@
 define view entity ZI_CEO_EmployeeFullName
   as select from zceo_employee_a
 {
-  key employee_id      as EmployeeId,
-  concat_with_space(first_name, last_name, 1) as FullName
+      /* Fields */
+  key employee_id                                 as EmployeeId,
+      concat_with_space(first_name, last_name, 1) as FullName
 }

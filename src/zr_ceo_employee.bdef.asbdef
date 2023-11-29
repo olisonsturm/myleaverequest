@@ -18,13 +18,18 @@ authorization master ( instance )
   association _LeaveEntitlements { create; }
   association _LeaveRequests { create; }
 
-  determination DetermineEmployeeNumber on modify { create; }
+  /* Aktions */
+  action Refresh result [1] $self;
 
+  /* Determinations */
+  determination DetermineEmployeeNumber on modify { field EntryDate; }
+
+  /* Fields */
   field ( readonly, numbering : managed ) EmployeeId;
   field ( readonly ) EmployeeNumber;
   field ( mandatory : create ) LastName, FirstName, EntryDate;
   field ( readonly : update ) EntryDate;
-  // Admin Data
+    // Admin Data
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zceo_employee_a corresponding
@@ -41,7 +46,7 @@ authorization master ( instance )
     }
 }
 
-define behavior for ZR_CEO_LeaveEntitlement alias LeaveEtitlement
+define behavior for ZR_CEO_LeaveEntitlement alias LeaveEntitlement
 persistent table zceo_entitleme_a
 //draft table zceo_entitleme_d
 lock dependent by _Employee
@@ -53,10 +58,11 @@ authorization dependent by _Employee
 
   association _Employee;
 
+  /* Fields */
   field ( readonly, numbering : managed ) EntitlementId;
   field ( readonly ) EmployeeUuid;
   field ( readonly : update ) EntitlementYear;
-  // Admin Data
+    // Admin Data
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zceo_entitleme_a corresponding
@@ -85,20 +91,24 @@ authorization dependent by _Applicant
   association _Applicant;
   association _Approver;
 
+  /* Aktions */
   action DeclineLeaveRequest result [1] $self;
   action ApproveLeaveRequest result [1] $self;
 
+  /* Validations */
   validation ValidateSufficientVacationDays on save { create; }
   validation ValidateDates on save { create; }
 
+  /* Determinations */
   determination DetermineVacationDays on modify { create; }
   determination DetermineState on modify { field ApplicantId, StartDate, EndDate, Remark; }
 
+  /* Fields */
   field ( readonly, numbering : managed ) RequestId;
   field ( readonly ) ApplicantId, State, StateDescription, VacationDays;
   field ( mandatory : create ) ApproverId, StartDate, EndDate;
   field ( readonly : update ) ApproverId, StartDate, EndDate;
-  // Admin Data
+    // Admin Data
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
 
   mapping for zceo_lrequest_a corresponding

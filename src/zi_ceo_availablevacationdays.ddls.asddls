@@ -13,6 +13,5 @@ define view entity ZI_CEO_AvailableVacationDays
 //where entitlement_year = left($session.system_date, 4);
 group by
   employee_uuid,
-  vacation_days,
   _ConsumedVD.ConsumedVacationDays,
-  _PlannedVD.PlannedVacationDays
+  _PlannedVD.PlannedVacationDays;

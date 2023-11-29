@@ -150,6 +150,7 @@ CLASS lhc_leaverequest IMPLEMENTATION.
     MODIFY ENTITY IN LOCAL MODE ZR_CEO_LeaveRequest
         UPDATE FIELDS ( State )
         WITH VALUE #( FOR lr IN leaverequests ( %tky = lr-%tky State = 'R' ) ).
+
   ENDMETHOD.
 
   METHOD DetermineVacationDays.
@@ -161,14 +162,15 @@ CLASS lhc_leaverequest IMPLEMENTATION.
 
     " Process Leave Request
     LOOP AT leaverequests REFERENCE INTO DATA(leaverequest).
+    DATA working_days TYPE int1.
+    working_days = 0.
       TRY.
           DATA: start_date_extended TYPE d.
           start_date_extended = leaverequest->StartDate - 1.
           DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
-          DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = start_date_extended iv_end = leaverequest->EndDate ).
+          working_days = calendar->calc_workingdays_between_dates( iv_start = start_date_extended iv_end = leaverequest->EndDate ).
           leaverequest->VacationDays = working_days.
         CATCH cx_fhc_runtime INTO DATA(exc).
-          leaverequest->VacationDays = 0. " Error
       ENDTRY.
     ENDLOOP.
 
@@ -227,16 +229,17 @@ CLASS lhc_leaverequest IMPLEMENTATION.
 
     " Process Leave Request
     LOOP AT leaverequests REFERENCE INTO DATA(leaverequest).
-
+    DATA working_days TYPE int1.
+    working_days = 0.
       " Validate AvailableVacationDays and Create Error Message
       TRY.
           DATA: start_date_extended TYPE d.
           start_date_extended = leaverequest->StartDate - 1.
           DATA(calendar) = cl_fhc_calendar_runtime=>create_factorycalendar_runtime( 'SAP_DE_BW' ).
-          DATA(working_days) = calendar->calc_workingdays_between_dates( iv_start = start_date_extended iv_end = leaverequest->EndDate ).
+          working_days = calendar->calc_workingdays_between_dates( iv_start = start_date_extended iv_end = leaverequest->EndDate ).
         CATCH cx_fhc_runtime INTO DATA(exc).
       ENDTRY.
-      SELECT FROM ZI_CEO_AvailableVacationDays FIELDS AvailableVacationDays INTO @DATA(availablevacationdays). ENDSELECT.
+      SELECT FROM ZI_CEO_AvailableVacationDays FIELDS AvailableVacationDays WHERE EmployeeUuid = @leaverequest->ApplicantId INTO @DATA(availablevacationdays). ENDSELECT.
       IF availablevacationdays IS INITIAL.
         availablevacationdays = 0.
       ENDIF.
@@ -262,6 +265,8 @@ CLASS lhc_employee DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys REQUEST requested_authorizations FOR Employee RESULT result.
     METHODS determineemployeenumber FOR DETERMINE ON MODIFY
       IMPORTING keys FOR employee~determineemployeenumber.
+    METHODS refresh FOR MODIFY
+      IMPORTING keys FOR ACTION employee~refresh RESULT result.
 
 ENDCLASS.
 
@@ -292,6 +297,19 @@ CLASS lhc_employee IMPLEMENTATION.
            WITH VALUE #( FOR e IN employees
                          ( %tky     = employee->%tky
                            EmployeeNumber = employee->EmployeeNumber ) ).
+  ENDMETHOD.
+
+  METHOD Refresh.
+
+    " Read Leave Request
+    READ ENTITY IN LOCAL MODE ZR_CEO_Employee
+        ALL FIELDS
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(employees).
+
+    " Set Result only for refresh
+    result = VALUE #( FOR e IN employees ( %tky = e-%tky %param = e ) ).
+
   ENDMETHOD.
 
 ENDCLASS.

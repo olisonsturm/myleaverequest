@@ -4,35 +4,34 @@
   title.value: 'VacationDays'
 }
 @UI.presentationVariant: [{sortOrder: [{ by: 'EntitlementYear', direction: #DESC }]}]
-annotate entity ZC_CEO_LeaveEntitlement
-  with 
+annotate entity ZC_CEO_LeaveEntitlement with
 {
   /* Facets */
-  @UI.facet: 
+  @UI.facet:
   [
     { position: 10, type: #FIELDGROUP_REFERENCE, label: 'Details', targetQualifier: 'details' },
     { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'admindata' }
-  ] 
+  ]
 
   /* Fields */
   @UI.hidden: true
   EntitlementId;
-  
+
   @UI.hidden: true
   EmployeeUuid;
-  
+
   @EndUserText: { label: 'Year', quickInfo: 'Year'}
   @UI.selectionField: [{ position: 10 }]
   @UI.lineItem: [{ position: 10 }]
   @UI.fieldGroup: [{ position: 10, qualifier: 'details' }]
   EntitlementYear;
-  
+
   @EndUserText: { label: 'Remaining Vacation Days', quickInfo: 'Remaining Vacation Days' }
   @UI.selectionField: [{ position: 20 }]
   @UI.lineItem: [{ position: 20 }]
   @UI.fieldGroup: [{ position: 20, qualifier: 'details' }]
   VacationDays;
-  
+
   /* Admin Data */
   @UI.fieldGroup: [{ position: 10, qualifier: 'admindata' }]
   CreatedBy;

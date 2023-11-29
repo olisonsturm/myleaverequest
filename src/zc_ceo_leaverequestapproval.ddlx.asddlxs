@@ -4,7 +4,7 @@
   title.value: 'Remark'
 }
 @UI.presentationVariant: [{sortOrder: [{ by: 'StartDate', direction: #DESC }]}]
-annotate entity ZC_CEO_LeaveRequest with
+annotate entity ZC_CEO_LeaveRequestApproval with
 {
   /* Facets */
   @UI.facet:
@@ -13,9 +13,18 @@ annotate entity ZC_CEO_LeaveRequest with
     { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Administrative Data', targetQualifier: 'admindata' }
   ]
 
+  /* Actions */
+  @UI.lineItem: [
+    { position: 10, type: #FOR_ACTION, dataAction: 'ApproveLeaveRequest', label: 'Approve' },
+    { position: 20, type: #FOR_ACTION, dataAction: 'DeclineLeaveRequest', label: 'Decline' }
+  ]
+  @UI.identification: [
+    { position: 10, type: #FOR_ACTION, dataAction: 'ApproveLeaveRequest', label: 'Approve' },
+    { position: 20, type: #FOR_ACTION, dataAction: 'DeclineLeaveRequest', label: 'Decline' }
+  ]
+
   /* Fields */
   @UI.hidden: true
-  //@UI.fieldGroup: [{ position: 5, qualifier: 'admindata' }] ich weiß es muss ein anzeige feld sein aber sieht scheiße aus
   RequestId;
 
   @EndUserText: { label: 'Approver', quickInfo: 'Full Name of Approver'}
@@ -81,4 +90,5 @@ annotate entity ZC_CEO_LeaveRequest with
   LastChangedBy;
   @UI.fieldGroup: [{ position: 40, qualifier: 'admindata' }]
   LastChangedAt;
+
 }

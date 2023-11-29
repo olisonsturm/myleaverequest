@@ -1,0 +1,36 @@
+@EndUserText.label: 'Employee Consumption View'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@Search.searchable: true
+@Metadata.allowExtensions: true
+define root view entity ZC_CEO_EmployeeApproval
+  provider contract transactional_query
+  as projection on ZR_CEO_Employee
+{
+      /* Fields */
+  key EmployeeId,
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CEO_EmployeeNumVH', element: 'EmployeeNumber' } }]
+      EmployeeNumber,
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.7
+      FirstName,
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold: 0.7
+      LastName,
+      FullName,
+      EntryDate,
+      AvailableVacationDays,
+      PlannedVacationDays,
+      ConsumedVacationDays,
+      AvailableVDaysCriticality,
+      PlannedVDaysCriticality,
+      ConsumedVDaysCriticality,
+
+      /* Admin Data */
+      CreatedBy,
+      CreatedAt,
+      LastChangedBy,
+      LastChangedAt,
+
+      /* Associations */
+      _LeaveRequests     : redirected to composition child ZC_CEO_LeaveRequestApproval
+}
