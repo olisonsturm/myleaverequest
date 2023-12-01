@@ -34,4 +34,5 @@ define root view entity ZC_CEO_Employee
       /* Associations */
       _LeaveEntitlements : redirected to composition child ZC_CEO_LeaveEntitlement,
       _LeaveRequests     : redirected to composition child ZC_CEO_LeaveRequest
+
 }

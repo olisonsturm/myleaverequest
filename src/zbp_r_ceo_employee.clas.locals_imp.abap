@@ -183,10 +183,7 @@ CLASS lhc_leaverequest IMPLEMENTATION.
   METHOD ValidateDates.
     DATA message TYPE REF TO zcm_ceo_lrequest.
     DATA current_date TYPE d.
-
-    CALL METHOD cl_abap_context_info=>get_system_date
-      RECEIVING
-        rv_date = current_date.
+    current_date = cl_abap_context_info=>get_system_date(  ).
 
     " Read Leave Request
     READ ENTITY IN LOCAL MODE ZR_CEO_LeaveRequest
@@ -202,9 +199,8 @@ CLASS lhc_leaverequest IMPLEMENTATION.
             textid = zcm_ceo_lrequest=>lrequest_endbeforestartdate
             severity = if_abap_behv_message=>severity-error
         ).
-        APPEND VALUE #( %tky = leaverequest->%tky %msg = message ) TO reported-leaverequest.
+        APPEND VALUE #( %tky = leaverequest->%tky  %element = VALUE #( EndDate = if_abap_behv=>mk-on ) %msg = message ) TO reported-leaverequest.
         APPEND VALUE #( %tky = leaverequest->%tky ) TO failed-leaverequest.
-        CONTINUE.
       ENDIF.
 
       IF leaverequest->StartDate < current_date.
@@ -212,7 +208,7 @@ CLASS lhc_leaverequest IMPLEMENTATION.
             textid = zcm_ceo_lrequest=>lrequest_startdateinthepast
             severity = if_abap_behv_message=>severity-error
         ).
-        APPEND VALUE #( %tky = leaverequest->%tky %msg = message ) TO reported-leaverequest.
+        APPEND VALUE #( %tky = leaverequest->%tky %element = VALUE #( StartDate = if_abap_behv=>mk-on ) %msg = message ) TO reported-leaverequest.
         APPEND VALUE #( %tky = leaverequest->%tky ) TO failed-leaverequest.
       ENDIF.
     ENDLOOP.
