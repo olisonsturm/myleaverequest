@@ -14,11 +14,12 @@ annotate entity ZC_CEO_LeaveRequestApproval with
   ]
 
   /* Actions */
-  @UI.lineItem: [
+  @UI.identification: [
     { position: 10, type: #FOR_ACTION, dataAction: 'ApproveLeaveRequest', label: 'Approve' },
     { position: 20, type: #FOR_ACTION, dataAction: 'DeclineLeaveRequest', label: 'Decline' }
   ]
-  @UI.identification: [
+  
+  @UI.lineItem: [
     { position: 10, type: #FOR_ACTION, dataAction: 'ApproveLeaveRequest', label: 'Approve' },
     { position: 20, type: #FOR_ACTION, dataAction: 'DeclineLeaveRequest', label: 'Decline' }
   ]
@@ -34,6 +35,7 @@ annotate entity ZC_CEO_LeaveRequestApproval with
   ApproverId;
 
   @EndUserText: { label: 'Applicant', quickInfo: 'Full Name of Applicant' }
+  @UI.selectionField: [{ position: 30 }]
   @UI.fieldGroup: [{ position: 80, qualifier: 'details' }]
   @UI.lineItem: [{ position: 5 }]
   ApplicantId;

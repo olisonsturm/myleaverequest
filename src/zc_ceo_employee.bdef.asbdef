@@ -9,15 +9,12 @@ define behavior for ZC_CEO_Employee
 
   use action Refresh;
 
-  use association _LeaveEntitlements { create; }
+  use association _LeaveEntitlements;
   use association _LeaveRequests { create; }
 }
 
 define behavior for ZC_CEO_LeaveEntitlement
 {
-  use update;
-  use delete;
-
   use association _Employee;
 }
 

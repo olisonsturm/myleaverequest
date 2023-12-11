@@ -8,6 +8,7 @@ define behavior for ZC_CEO_EmployeeApproval
 
 define behavior for ZC_CEO_LeaveRequestApproval
 {
+
   use action DeclineLeaveRequest;
   use action ApproveLeaveRequest;
 

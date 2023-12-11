@@ -7,6 +7,7 @@ define view entity ZC_CEO_LeaveRequestApproval
 {
       /* Fields */
   key RequestId,
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CEO_EmployeeUuidVH', element: 'EmployeeId' }}]
       ApplicantId,
       @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CEO_EmployeeUuidVH', element: 'EmployeeId' }}]
       ApproverId,

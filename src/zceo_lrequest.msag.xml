@@ -36,13 +36,13 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZCEO_LREQUEST</ARBGB>
      <MSGNR>005</MSGNR>
-     <TEXT>The end date cannot be before the start date by creating a leave request</TEXT>
+     <TEXT>The end date cannot be before the start date</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>ZCEO_LREQUEST</ARBGB>
      <MSGNR>006</MSGNR>
-     <TEXT>The start date cannot be in the past when creating a leave request</TEXT>
+     <TEXT>The start date cannot be in the past</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>

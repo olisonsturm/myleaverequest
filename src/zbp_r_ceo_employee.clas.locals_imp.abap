@@ -96,6 +96,18 @@ CLASS lhc_leaverequest IMPLEMENTATION.
     LOOP AT leaverequests REFERENCE INTO DATA(leaverequest). " foreach quasi
 
       " Validate State and Create Error Message
+      IF leaverequest->State = 'D'.
+        message = NEW zcm_ceo_lrequest(
+            textid = zcm_ceo_lrequest=>lrequest_already_declined
+            severity = if_abap_behv_message=>severity-error
+            remark  = leaverequest->Remark
+        ).
+        APPEND VALUE #( %tky = leaverequest->%tky %msg = message ) TO reported-leaverequest.
+        APPEND VALUE #( %tky = leaverequest->%tky ) TO failed-leaverequest.
+        DELETE leaverequests INDEX sy-tabix.
+        CONTINUE.
+      ENDIF.
+
       IF leaverequest->State = 'A'.
         message = NEW zcm_ceo_lrequest(
             textid = zcm_ceo_lrequest=>lrequest_already_approved
@@ -108,18 +120,7 @@ CLASS lhc_leaverequest IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
-      IF leaverequest->State = 'D'.
-        message = NEW zcm_ceo_lrequest(
-            textid = zcm_ceo_lrequest=>lrequest_already_declined
-            severity = if_abap_behv_message=>severity-error
-            remark  = leaverequest->Remark
-        ).
-        APPEND VALUE #( %tky = leaverequest->%tky %msg = message ) TO reported-leaverequest.
-        APPEND VALUE #( %tky = leaverequest->%tky ) TO failed-leaverequest.
-        DELETE leaverequests INDEX sy-tabix.
-      ENDIF.
-
-      " Set Status on Cancelled und Create Sucess Message
+      " Set State to D und Create Success Message
       leaverequest->State = 'A'.
       message = NEW zcm_ceo_lrequest(
             textid = zcm_ceo_lrequest=>lrequest_approve
